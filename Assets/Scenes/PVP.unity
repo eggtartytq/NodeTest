@@ -158,8 +158,6 @@ MonoBehaviour:
   node: {fileID: 7894064666338646847, guid: bf10b85de4e37884680353bc9f769534, type: 3}
   hengBranch: {fileID: 453730248622727892, guid: 963c1a5753acb17488d24b83f2bff9bc, type: 3}
   shuBranch: {fileID: 622200039248793905, guid: 62455bbaa2435304181c4cd9d066fac4, type: 3}
-  emptyResource: {fileID: 6173266335864304885, guid: 7513e2053a8fa9743b03715402691c11, type: 3}
-  resource: {fileID: 4212047754745825038, guid: 3320d55a50be79b4ea146b95f6cd3454, type: 3}
   resourceList:
   - {fileID: 5015995889806251867, guid: f594f67a420bd334a8486f83c0b0e2a9, type: 3}
   - {fileID: 4491759167546014283, guid: 7c31108dca5777144a08ba7b1a261d9a, type: 3}
@@ -186,7 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e1bd6ede7dd364ca1d5912c3ce3530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardScript: {fileID: 0}
 --- !u!4 &77764163
 Transform:
   m_ObjectHideFlags: 0
