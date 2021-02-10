@@ -10,8 +10,9 @@ public class BoardManager : MonoBehaviour
     {
         public ResourceInfo.Color nodeColor;
         public int nodeNum;
-
-       
+        //safe the location
+        public int xLoc; 
+        public int yLoc;
     }
     public int columns = 11;
     public int rows = 11;
@@ -19,7 +20,8 @@ public class BoardManager : MonoBehaviour
     public GameObject hengBranch;
     public GameObject shuBranch;
     public GameObject[] resourceList;
-    public NodeResource[] NodeList = new NodeResource[13];
+    public GameObject[] nodeList;
+    public NodeResource[] ResourceInfoList = new NodeResource[13];
     /*
      * X = empty; N = node; H = heng branch; S = shu branch; R = resource
      */
@@ -38,7 +40,9 @@ public class BoardManager : MonoBehaviour
         {'X', 'X', 'X', 'X', 'N', 'H', 'N', 'X', 'X', 'X', 'X'},
     };
 
-    private int count = 0;
+    private int resourceCount = 0;
+    private int nodeCount = 0;
+    //private int branchCount = 0;
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
     private ResourceInfo.Color tempColor;
@@ -72,13 +76,20 @@ public class BoardManager : MonoBehaviour
                 switch(Map[x ,y])
                 {
                     case 'R':
-                        instance = Instantiate(resourceList[count], new Vector3(hang + 5 * x, lie + 5 * y, 0f), Quaternion.identity) as GameObject;
+                        instance = Instantiate(resourceList[resourceCount], new Vector3(hang + 5 * x, lie + 5 * y, 0f), Quaternion.identity) as GameObject;
                         instance.transform.SetParent(boardHolder);
-                        count++;
+                        ResourceInfoList[resourceCount].nodeColor = resourceList[resourceCount].GetComponent<ResourceInfo>().nodeColor;
+                        ResourceInfoList[resourceCount].nodeNum = resourceList[resourceCount].GetComponent<ResourceInfo>().numOfResource;
+                        ResourceInfoList[resourceCount].xLoc = hang + 5 * x;
+                        ResourceInfoList[resourceCount].yLoc = lie + 5 * y;
+                        resourceCount++;
                         break;
                     case 'N':
-                        instance = Instantiate(node, new Vector3(hang + 5 * x, lie + 5 * y, 0f), Quaternion.identity) as GameObject;
+                        instance = Instantiate(nodeList[nodeCount], new Vector3(hang + 5 * x, lie + 5 * y, 0f), Quaternion.identity) as GameObject;
                         instance.transform.SetParent(boardHolder);
+                        nodeList[nodeCount].GetComponent<NodeInfo>().nodeOwner = NodeInfo.Owner.Nil;
+                        nodeList[nodeCount].GetComponent<NodeInfo>().nodeOrder = nodeCount;
+                        nodeCount++;
                         break;
                     case 'H':
                         instance = Instantiate(hengBranch, new Vector3(hang + 5 * x, lie + 5 * y, 0f), Quaternion.identity) as GameObject;
@@ -102,17 +113,29 @@ public class BoardManager : MonoBehaviour
         {
             tempColor = resourceList[i].GetComponent<ResourceInfo>().nodeColor;
             tempNum = resourceList[i].GetComponent<ResourceInfo>().numOfResource;
-            NodeList[i].nodeColor = tempColor;
-            NodeList[i].nodeNum = tempNum;
+            ResourceInfoList[i].nodeColor = tempColor;
+            ResourceInfoList[i].nodeNum = tempNum;
+            
         }
     }
     public void SetupScene()
     {
         gridPositions.Clear();
         Shuffle(resourceList);
-        GetInfoForResource();
+        //GetInfoForResource();
         BoardSetUp(GameBoard);
-        Debug.Log(NodeList[3].nodeColor);
-        Debug.Log(NodeList[3].nodeNum);
+    }
+
+    public void ChangeNodeOwner(int nodeNum)
+    {
+        nodeList[nodeNum].GetComponent<NodeInfo>().nodeOwner = NodeInfo.Owner.USSR;
+        //Debug.Log(nodeNum);
+        //Debug.Log(nodeList[nodeNum].GetComponent<NodeInfo>().nodeOrder);
+        /*
+        for(int i = 0; i < 24; i++)
+        {
+            Debug.Log(nodeList[i].GetComponent<NodeInfo>().nodeOwner);
+        }
+        */
     }
 }
