@@ -33,9 +33,7 @@ public class CheckDataList : MonoBehaviour
     
     public void DepltedResource()
     {
-        //Debug.Log("lol");
-        
-        //GameObject instance;
+       
         for (int i = 0; i < 24; i++)
         {
             //Debug.Log(BM.nodeList[i].GetComponent<NodeInfo>().nodeOwner);
@@ -44,6 +42,7 @@ public class CheckDataList : MonoBehaviour
                 UsedNode.Add(i);
             }
         }
+
         Debug.Log(UsedNode.Count);
         
         for(int i = 0; i < 13; i++)

@@ -7,7 +7,6 @@ public class NodeInfo : MonoBehaviour
 {
     private GameObject gm;
     private int cc;
-    private string dd;
     public enum Owner
     {
         Nil = 0,
@@ -23,7 +22,7 @@ public class NodeInfo : MonoBehaviour
         this.gameObject.GetComponent<NodeInfo>().nodeOwner = Owner.USSR;
         cc = this.gameObject.GetComponent<NodeInfo>().nodeOrder;
         Debug.Log(this.gameObject.GetComponent<NodeInfo>().nodeOrder);
-        //Debug.Log(this.gameObject.GetComponent<NodeInfo>().nodeOwner);
+        Debug.Log(this.gameObject.GetComponent<NodeInfo>().nodeOwner);
         GameObject.FindObjectOfType<BoardManager>().ChangeNodeOwner(cc);
         
     }
